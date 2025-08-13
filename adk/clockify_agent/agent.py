@@ -3,7 +3,7 @@ from google.adk.agents import LlmAgent
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters
 # from google.adk.tools.mcp_tool import MCPToolset, StdioServerParameters
 
-PATH_TO_YOUR_MCP_SERVER_SCRIPT = "/Users/aslam/Desktop/projects/clockify-mcp/server.py"
+PATH_TO_YOUR_MCP_SERVER_SCRIPT = "/path/server.py"
 
 root_agent = LlmAgent(
     model='gemini-2.0-flash',
