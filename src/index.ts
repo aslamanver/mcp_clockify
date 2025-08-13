@@ -6,7 +6,7 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { z } from "zod";
 
 const MCP_NAME = "mcp_clockify";
-const VERSION = "1.0.22";
+const VERSION = "1.0.23";
 const CLOCKIFY_API_BASE = "https://api.clockify.me/api/v1";
 const USER_AGENT = MCP_NAME + "/" + VERSION;
 
