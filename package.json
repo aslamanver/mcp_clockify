@@ -1,6 +1,6 @@
 {
   "name": "mcp_clockify",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "",
   "main": "build/index.js",
   "type": "module",
@@ -33,6 +33,7 @@
     "@types/node": "^24.0.3",
     "typescript": "^5.8.3"
   },
+  "homepage": "https://aslamanver.github.io/mcp_clockify/",
   "repository": {
     "type": "git",
     "url": "https://github.com/aslamanver/mcp_clockify.git"
