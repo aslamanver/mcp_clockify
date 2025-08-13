@@ -7,3 +7,4 @@ firebase-debug.log
 ai/
 DRAFT.md
 .vscode/
+.DS_Store
