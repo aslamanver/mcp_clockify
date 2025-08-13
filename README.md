@@ -278,4 +278,4 @@ For issues and questions:
 
 ---
 
-**Note**: This is an unofficial integration. Clockify is a trademark of COING Inc.
+**Note**: This is an unofficial integration.
