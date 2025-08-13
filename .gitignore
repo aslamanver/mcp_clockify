@@ -1,0 +1,9 @@
+build/
+logs/
+*.pyc
+__pycache__/
+node_modules/
+firebase-debug.log
+ai/
+DRAFT.md
+.vscode/

@@ -1,0 +1,36 @@
+{
+  "name": "mcp_clockify",
+  "version": "1.0.19",
+  "description": "",
+  "main": "build/index.js",
+  "type": "module",
+  "bin": {
+    "mcp_clockify": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "prepublishOnly": "npm run build",
+    "inspect": "npx @modelcontextprotocol/inspector node build/index.js"
+  },
+  "files": [
+    "build",
+    "README.md"
+  ],
+  "keywords": [
+    "clockify",
+    "mcp",
+    "modelcontextprotocol"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.2",
+    "moment": "^2.30.1",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.3",
+    "typescript": "^5.8.3"
+  }
+}
