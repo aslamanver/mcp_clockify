@@ -21,7 +21,7 @@ const server = new McpServer({
 async function makeAPIRequest<T>(
   url: string,
   method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
-  body?: string | object
+  body?: string | object,
 ): Promise<T> {
   if (!process.env.CLOCKIFY_API_KEY) {
     throw new Error("Missing Clockify API key");
@@ -41,7 +41,7 @@ async function makeAPIRequest<T>(
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(
-        `HTTP error! status: ${response.status}, response: ${errorText}`
+        `HTTP error! status: ${response.status}, response: ${errorText}`,
       );
     }
     if (response.status === 204) return {} as T;
@@ -53,7 +53,7 @@ async function makeAPIRequest<T>(
 
 function sendResponse(
   type: "text" = "text",
-  text: string | object = ""
+  text: string | object = "",
 ): CallToolResult {
   return {
     content: [
@@ -90,7 +90,7 @@ server.registerTool(
         defaultWorkspace: response.defaultWorkspace,
       });
     });
-  }
+  },
 );
 
 server.registerTool(
@@ -107,10 +107,10 @@ server.registerTool(
         response.map((workspace) => ({
           id: workspace.id,
           name: workspace.name,
-        }))
+        })),
       );
     });
-  }
+  },
 );
 
 server.registerTool(
@@ -122,7 +122,7 @@ server.registerTool(
       workspaceId: z
         .string()
         .describe(
-          "This workspace ID can be obtained from the list-clockify-workspaces tool."
+          "This workspace ID can be obtained from the list-clockify-workspaces tool.",
         ),
       name: z
         .string()
@@ -137,7 +137,7 @@ server.registerTool(
           input.workspaceId
         }/projects?archived=false&page=1&page-size=5000&name=${
           input.name || ""
-        }`
+        }`,
       );
       return sendResponse(
         "text",
@@ -146,10 +146,10 @@ server.registerTool(
           name: project.name,
           workspaceId: project.workspaceId,
           billable: project.billable,
-        }))
+        })),
       );
     });
-  }
+  },
 );
 
 server.registerTool(
@@ -161,19 +161,19 @@ server.registerTool(
       workspaceId: z
         .string()
         .describe(
-          "This workspace ID can be obtained from the list-clockify-workspaces tool."
+          "This workspace ID can be obtained from the list-clockify-workspaces tool.",
         ),
       projectId: z
         .string()
         .describe(
-          "This project ID can be obtained from the list-clockify-projects tool."
+          "This project ID can be obtained from the list-clockify-projects tool.",
         ),
     },
   },
   async (input) => {
     return responseWrapper(async () => {
       const response = await makeAPIRequest<any[]>(
-        `/workspaces/${input.workspaceId}/projects/${input.projectId}/tasks`
+        `/workspaces/${input.workspaceId}/projects/${input.projectId}/tasks`,
       );
       return sendResponse(
         "text",
@@ -181,10 +181,10 @@ server.registerTool(
           id: task.id,
           name: task.name,
           projectId: task.projectId,
-        }))
+        })),
       );
     });
-  }
+  },
 );
 
 /**
@@ -208,12 +208,12 @@ server.registerTool(
       workspaceId: z
         .string()
         .describe(
-          "This workspace ID can be obtained from the list-clockify-workspaces tool."
+          "This workspace ID can be obtained from the list-clockify-workspaces tool.",
         ),
       userId: z
         .string()
         .describe(
-          "This user ID can be obtained from the get-clockify-user tool."
+          "This user ID can be obtained from the get-clockify-user tool.",
         ),
       start: z.string().describe("Start date in yyyy-MM-ddThh:mm:ssZ format."),
       end: z.string().describe("End date in yyyy-MM-ddThh:mm:ssZ format."),
@@ -232,11 +232,11 @@ server.registerTool(
   async (input) => {
     return responseWrapper(async () => {
       const response = await makeAPIRequest<any[]>(
-        `/workspaces/${input.workspaceId}/user/${input.userId}/time-entries?start=${input.start}&end=${input.end}&page=${input.page}&page-size=${input.pageSize}`
+        `/workspaces/${input.workspaceId}/user/${input.userId}/time-entries?start=${input.start}&end=${input.end}&page=${input.page}&page-size=${input.pageSize}`,
       );
       return sendResponse("text", response);
     });
-  }
+  },
 );
 
 /**
@@ -259,7 +259,7 @@ server.registerTool(
       workspaceId: z
         .string()
         .describe(
-          "This workspace ID can be obtained from the list-clockify-workspaces tool."
+          "This workspace ID can be obtained from the list-clockify-workspaces tool.",
         ),
       billable: z
         .boolean()
@@ -276,7 +276,7 @@ server.registerTool(
       projectId: z
         .string()
         .describe(
-          "This project ID can be obtained from the list-clockify-projects tool."
+          "This project ID can be obtained from the list-clockify-projects tool.",
         ),
     },
   },
@@ -293,7 +293,7 @@ server.registerTool(
           start: start.toISOString(),
           end: end.toISOString(),
           projectId: input.projectId,
-        }
+        },
       );
       return sendResponse("text", {
         id: response.id,
@@ -303,7 +303,7 @@ server.registerTool(
         projectId: response.projectId,
       });
     });
-  }
+  },
 );
 
 /**
@@ -327,12 +327,12 @@ server.registerTool(
       timeEntryId: z
         .string()
         .describe(
-          "This time entry ID can be obtained from the last created time entry."
+          "This time entry ID can be obtained from the last created time entry.",
         ),
       workspaceId: z
         .string()
         .describe(
-          "This workspace ID can be obtained from the list-clockify-workspaces tool."
+          "This workspace ID can be obtained from the list-clockify-workspaces tool.",
         ),
       billable: z
         .boolean()
@@ -349,7 +349,7 @@ server.registerTool(
       projectId: z
         .string()
         .describe(
-          "This project ID can be obtained from the list-clockify-projects tool."
+          "This project ID can be obtained from the list-clockify-projects tool.",
         ),
     },
   },
@@ -366,7 +366,7 @@ server.registerTool(
           start: start.toISOString(),
           end: end.toISOString(),
           projectId: input.projectId,
-        }
+        },
       );
       return sendResponse("text", {
         id: response.id,
@@ -376,7 +376,7 @@ server.registerTool(
         projectId: response.projectId,
       });
     });
-  }
+  },
 );
 
 server.registerTool(
@@ -387,12 +387,12 @@ server.registerTool(
       timeEntryId: z
         .string()
         .describe(
-          "This time entry ID can be obtained from the last created time entry."
+          "This time entry ID can be obtained from the last created time entry.",
         ),
       workspaceId: z
         .string()
         .describe(
-          "This workspace ID can be obtained from the list-clockify-workspaces tool."
+          "This workspace ID can be obtained from the list-clockify-workspaces tool.",
         ),
     },
   },
@@ -400,22 +400,22 @@ server.registerTool(
     return responseWrapper(async () => {
       await makeAPIRequest<null>(
         `/workspaces/${input.workspaceId}/time-entries/${input.timeEntryId}`,
-        "DELETE"
+        "DELETE",
       );
       return sendResponse("text", {
         message: "Time entry deleted successfully.",
       });
     });
-  }
+  },
 );
 
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.log(`${USER_AGENT} running on stdio`);
+  // console.log(`${USER_AGENT} running on stdio`);
 }
 
 main().catch((error) => {
-  console.error(`${USER_AGENT} error starting`, error);
+  // console.error(`${USER_AGENT} error starting`, error);
   process.exit(1);
 });
