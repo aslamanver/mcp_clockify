@@ -138,6 +138,30 @@ Add the following configuration to your MCP client:
 
 5. Save the file and restart VS Code
 
+### Antigravity Setup
+
+1. Open Antigravity
+2. Run the command `Antigravity: Manage MCP Servers` (Ctrl/Cmd + Shift + P)
+3. View raw config file
+4. Add the configuration with your API key:
+
+```json
+{
+  "mcpServers": {
+    ...
+    "mcp_clockify": {
+      "command": "npx",
+      "args": ["-y", "mcp_clockify@latest"],
+      "env": {
+        "CLOCKIFY_API_KEY": "your-clockify-api-key-here"
+      }
+    }
+  }
+}
+```
+
+5. Save the file and restart Antigravity
+
 ### Claude Desktop Setup
 
 Add to your Claude Desktop configuration file:
@@ -229,12 +253,10 @@ I need to log 3 hours of work on the Mobile App project from 2 PM to 5 PM today 
 ### Common Issues
 
 1. **Invalid API Key Error**
-
    - Verify your API key is correct and has proper permissions
    - Check that the environment variable is properly set
 
 2. **Network Connection Issues**
-
    - Ensure you have internet connectivity
    - Verify Clockify API is accessible from your network
 
